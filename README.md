@@ -1,1 +1,3 @@
 # wheat-installer
+
+THIS INSTALLER IS TOTALLY NOT READY - DO NOT USE
