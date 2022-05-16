@@ -26,6 +26,9 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]
     PROJECT_THEME_DIR="$PWD"/grav-theme-"$THEME_NAME"
     echo "Moving user folder"
     mv grav-admin/user .
+    sed -i -e "s/wheat/$THEME_NAME/g" grav-theme-$THEME_NAME/blueprints.yaml
+    sed -i -e "s/Wheat/${THEME_NAME^}/g" grav-theme-$THEME_NAME/blueprints.yaml
+    sed -i -e "s/Wheat/${THEME_NAME^}/g" grav-theme-$THEME_NAME/wheat.php
     if windows; then
         echo "Symlinking project for Windows"
         MSYS=winsymlinks:nativestrict ln -s $PROJECT_USER_DIR $ADMIN_USER_DIR
