@@ -56,6 +56,9 @@ if [[ $RUN =~ ^[Yy]$ ]]
         ln -s $PROJECT_USER_DIR $GRAV_USER_DIR
         ln -s $PROJECT_THEME_DIR $GRAV_THEME_DIR
     fi
-    then echo "All set! [tap any key to exit]"
+    then 
+    echo "All set! - go to 127.0.0.1/$THEME_NAME"
+    echo "You can now safelly delete this script."
+    echo "[tap any key to exit]"
     read
 fi
