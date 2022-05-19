@@ -9,10 +9,10 @@ if [[ $RUN =~ ^[Yy]$ ]]
     echo "Enter your theme's name (all lowercase, without the grav-theme prefix)." 
     echo
     read THEME_NAME
-    # echo
-    # echo "If you are using XAMPP or WAMPP, and your project is not in the webroot, enter the full path to it. Otherwise, just press [ENTER]."
-    # echo
-    # read WEB_ROOT
+    echo
+    echo "If you are using XAMPP or WAMPP, and your project is not in the webroot, enter the full path to it. Otherwise, just press [ENTER]."
+    echo "WARNING TO WINDOWS USERS: USE ONLY FORWARD SLASH!!!"
+    read WEB_ROOT
     echo
     echo "Fetching grav-admin"
     curl -L -sS "https://getgrav.org/download/core/grav-admin/1.7.33" -o grav-admin.zip
@@ -43,19 +43,22 @@ if [[ $RUN =~ ^[Yy]$ ]]
     sed -i -e "s/Wheat/${THEME_NAME^}/g" grav-theme-$THEME_NAME/$THEME_NAME.php
     if windows; then
         echo "Symlinking project for Windows"
-        # if [ $WEB_ROOT ]; then
-        #     MSYS=winsymlinks:nativestrict ln -s $GRAV_DIR $WEB_ROOT/$THEME_NAME
-        # fi
+        if [ $WEB_ROOT ]; then
+            MSYS=winsymlinks:nativestrict ln -s $GRAV_DIR $WEB_ROOT/$THEME_NAME
+        fi
         MSYS=winsymlinks:nativestrict ln -s $PROJECT_USER_DIR $GRAV_USER_DIR
         MSYS=winsymlinks:nativestrict ln -s $PROJECT_THEME_DIR $GRAV_THEME_DIR
     else
         echo "Symlinking project for Linux/Mac"
-        # if [ $WEB_ROOT ]; then
-        #     ln -s $WEB_ROOT/$THEME_NAME $GRAV_DIR
-        # fi
+        if [ $WEB_ROOT ]; then
+            ln -s $WEB_ROOT/$THEME_NAME $GRAV_DIR
+        fi
         ln -s $PROJECT_USER_DIR $GRAV_USER_DIR
         ln -s $PROJECT_THEME_DIR $GRAV_THEME_DIR
     fi
-    then echo "All set! [tap any key to exit]"
+    then 
+    echo "All set! - go to 127.0.0.1/$THEME_NAME"
+    echo "You can now safelly delete this script."
+    echo "[tap any key to exit]"
     read
 fi
